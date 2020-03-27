@@ -73,8 +73,7 @@
                     <b-form-select
                             v-model="selected"
                             required
-                            :options="options"
-                            class="mt-3"></b-form-select>
+                            :options="options"></b-form-select>
                 </b-form-group>
                 <br>
                 <div>
