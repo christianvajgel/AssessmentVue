@@ -41,11 +41,6 @@
         created(){
             this.getPosts();
         },
-        // data() {
-        //     return {
-        //         post_id : this.post.id,
-        //     }
-        // }
     };
 </script>
 

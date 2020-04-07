@@ -5,7 +5,7 @@
             <h1 class="titlePage">Post Edition</h1>
         </div>
 
-        <div class="row container postEditionMainDiv">
+        <div v-if="postById(id)" class="row container postEditionMainDiv">
             <div class="col divPost">
                 <h5 id="old_userId">{{ postById(id).userId }}</h5>
                 <h5 id="old_id">{{ postById(id).id }}</h5>
@@ -23,7 +23,7 @@
                                 v-model="new_post.userId"
                                 id="input_userId"
                                 type="number"
-                                required
+                                disabled
                                 min="1"
                                 placeholder="Choose a new User ID for the post">
                         </b-form-input>
@@ -36,7 +36,7 @@
                                 v-model="new_post.id"
                                 id="input_id"
                                 type="number"
-                                required
+                                disabled
                                 min="1"
                                 placeholder="Choose a new ID for your post">
                         </b-form-input>
@@ -99,17 +99,6 @@
     import { mapGetters, mapActions } from "vuex";
     export default {
         name: "EditPost",
-        methods: {
-            ...mapActions(["updatePost"]),
-            onSubmit() {
-                this.updatePost(this.new_post);
-                alert("Success!");
-            }
-        },
-        computed: mapGetters(["postById"]),
-        created() {
-            this.new_post = this.postById(this.id);
-        },
         data() {
             return {
                 id:this.$route.params.id,
@@ -126,9 +115,20 @@
                     { value: 'food', text: 'Food' },
                     { value: 'music', text: 'Music' },
                     { value: 'travel', text: 'Travel' },
-
                 ],
             };
+        },
+        computed: mapGetters(["postById"]),
+        created() {
+            this.new_post = this.postById(this.id);
+        },
+        methods: {
+            ...mapActions(["updatePost"]),
+            onSubmit() {
+                console.log(this.new_post);
+                this.updatePost(this.new_post);
+                alert("Success!");
+            }
         },
     };
 </script>
